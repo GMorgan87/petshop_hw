@@ -78,6 +78,11 @@ def customer_can_afford_pet(customer, new_pet)
 end
 
 def sell_pet_to_customer(pet_shop, pet, customer)
+
+  if pet == nil
+    return
+  end
+
   if customer_can_afford_pet(customer, pet) == true
     add_pet_to_customer(customer, pet)
     remove_customer_cash(customer, pet[:price])
