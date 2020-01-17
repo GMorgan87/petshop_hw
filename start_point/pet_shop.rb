@@ -42,11 +42,7 @@ def find_pet_by_name(pet_shop, name)
 end
 
 def remove_pet_by_name(pet_shop, name)
-  for pet in pet_shop[:pets]
-    if pet[:name] == name
-      pet_shop[:pets].delete(pet)
-    end
-  end
+      pet_shop[:pets].delete(find_pet_by_name(pet_shop, name))
 end
 
 def add_pet_to_stock(pet_shop, new_pet)
@@ -77,6 +73,7 @@ def customer_can_afford_pet(customer, new_pet)
   end
 end
 
+
 def sell_pet_to_customer(pet_shop, pet, customer)
 
   if pet == nil
@@ -86,10 +83,8 @@ def sell_pet_to_customer(pet_shop, pet, customer)
   if customer_can_afford_pet(customer, pet) == true
     add_pet_to_customer(customer, pet)
     remove_customer_cash(customer, pet[:price])
-    increase_pets_sold(pet_shop, 1)
     add_or_remove_cash(pet_shop, pet[:price])
-  else
-
+    increase_pets_sold(pet_shop, 1)
   end
 
 end
